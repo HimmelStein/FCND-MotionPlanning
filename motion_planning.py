@@ -117,7 +117,7 @@ class MotionPlanning(Drone):
     def plan_path(self):
         self.flight_state = States.PLANNING
         print("Searching for a path ...")
-        TARGET_ALTITUDE = 5
+        TARGET_ALTITUDE = 7
         SAFETY_DISTANCE = 5
 
         self.target_position[2] = TARGET_ALTITUDE
@@ -160,7 +160,7 @@ class MotionPlanning(Drone):
         freeCells = [list(cell) for cell in np.argwhere(grid==0)]
         random.shuffle(freeCells)
         grid_goal = tuple(freeCells[0])
-        grid_goal = (167-north_offset, -33-east_offset)
+        grid_goal = (336-north_offset, 462-east_offset)
         print("grid goal ",[grid_goal[0]+north_offset, grid_goal[1]+east_offset])
 
         if self._mp_method == "a_star":
@@ -172,8 +172,10 @@ class MotionPlanning(Drone):
         
             # TODO: prune path to minimize number of waypoints
             # TODO (if you're feeling ambitious): Try a different approach altogether!
-
+            # print(path)
             path = prune_path(path, polygons)
+            # print(path)
+
 
             # Convert path to waypoints
             waypoints = [[int(p[0] + north_offset), int(p[1] + east_offset), TARGET_ALTITUDE, 0] for p in path]

@@ -73,7 +73,7 @@ def prune_path(path, polygons):
         for polygon in polygons:
             if polygon.crosses(ln):
                 canConnect = False
-            break
+                break
         if not canConnect:
             result.append(path[idx - 1])
             ptStart = path[idx]
@@ -119,8 +119,10 @@ def create_grid_polygons(data, drone_altitude, safety_distance):
                 int(np.clip(east + d_east + safety_distance - east_min, 0, east_size-1)),
             ]
             grid[obstacle[0]:obstacle[1]+1, obstacle[2]:obstacle[3]+1] = 1
-            plg = Polygon([(obstacle[0],obstacle[3]+1), (obstacle[1]+1,obstacle[3]+1),
-                           (obstacle[1] + 1, obstacle[2] + 1), (obstacle[0],obstacle[2]+1)])
+            plg = Polygon([(obstacle[0],obstacle[3]+1),
+                           (obstacle[1]+1,obstacle[3]+1),
+                           (obstacle[1] + 1, obstacle[2] + 1),
+                           (obstacle[0],obstacle[2]+1)])
             polygons.append(plg)
     return grid, int(north_min), int(east_min), polygons
 
