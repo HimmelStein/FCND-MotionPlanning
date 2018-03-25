@@ -30,25 +30,6 @@ def before_waypoint_of(waypoint, path=[]):
 
 def prune_path(path, polygons):
     """
-    let path start with ptStart, end with ptEnd
-    draw a straight line segment between ptStart and ptEnd, (ptStart, ptEnd),
-    if (ptStart, ptEnd) across polygon, pg:
-        find ptx on path nearest to pg
-        if the line segment (ptStart,ptx) not across pg:
-            path1 = find_waypoints_from_to(path, ptStart, to=ptx)
-            p3 = next_waypoint_of(ptx, path=path)
-            path3 = find_waypoints_from_to(path, p3, to=ptEnd)
-            return prune_path(path1, polygons) + (p1,p3)+prune_path(path3, polygons)
-        if the line segment (ptx,ptEnd) not across pg:
-            path2 = find_waypoints_from_to(path, ptx, to=ptEnd)
-            p4 = before_waypoint_of(ptx, path=path)
-            path2 = find_waypoints_from_to(path, ptStart, to=p4)
-            return prune_path(path2, polygons) + (p4,ptx)+prune_path(path2, polygons)
-    return (ptStart, ptEnd)
-    :param path:
-    :param polygons:
-    :return:
-    """
     ptStart, ptEnd = path[0], path[-1]
     ln = LineString([ptStart, ptEnd])
     polygon = None
@@ -77,6 +58,28 @@ def prune_path(path, polygons):
             return prune_path(path2, polygons) +  prune_path(path4, polygons)
     else:
         return [ptStart, ptEnd]
+
+    :param path:
+    :param polygons:
+    :return:
+    """
+    ptStart = path[0]
+    result = [ptStart]
+    idx = 1
+    while idx < len(path) - 1:
+        ptx = path[idx]
+        ln = LineString([ptStart, ptx])
+        canConnect = True
+        for polygon in polygons:
+            if polygon.crosses(ln):
+                canConnect = False
+            break
+        if not canConnect:
+            result.append(path[idx - 1])
+            ptStart = path[idx]
+        idx += 1
+    result.append(path[-1])
+    return result
 
 
 def create_grid_polygons(data, drone_altitude, safety_distance):

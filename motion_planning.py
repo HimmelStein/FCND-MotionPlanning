@@ -110,7 +110,8 @@ class MotionPlanning(Drone):
 
     def send_waypoints(self):
         print("Sending waypoints to simulator ...")
-        data = msgpack.dumps(self.waypoints)
+        # data = msgpack.dumps(self.waypoints)
+        data = msgpack.packb(self.waypoints, strict_types=True)
         self.connection._master.write(data)
 
     def plan_path(self):
@@ -159,6 +160,7 @@ class MotionPlanning(Drone):
         freeCells = [list(cell) for cell in np.argwhere(grid==0)]
         random.shuffle(freeCells)
         grid_goal = tuple(freeCells[0])
+        grid_goal = (167, -33)
         print("grid goal ",[grid_goal[0]+north_offset, grid_goal[1]+east_offset])
 
         if self._mp_method == "a_star":
@@ -171,10 +173,11 @@ class MotionPlanning(Drone):
             # TODO: prune path to minimize number of waypoints
             # TODO (if you're feeling ambitious): Try a different approach altogether!
 
-            #path = prune_path(path, polygons)
+            path = prune_path(path, polygons)
 
             # Convert path to waypoints
-            waypoints = [[p[0] + north_offset, p[1] + east_offset, TARGET_ALTITUDE, 0] for p in path]
+            waypoints = [[int(p[0] + north_offset), int(p[1] + east_offset), TARGET_ALTITUDE, 0] for p in path]
+
         elif self._mp_method == "simplest":
             pass
         elif self._mp_method == "medial_axis":
