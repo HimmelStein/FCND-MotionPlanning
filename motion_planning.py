@@ -160,7 +160,7 @@ class MotionPlanning(Drone):
         freeCells = [list(cell) for cell in np.argwhere(grid==0)]
         random.shuffle(freeCells)
         grid_goal = tuple(freeCells[0])
-        grid_goal = (336-north_offset, 462-east_offset)
+        # grid_goal = (336-north_offset, 462-east_offset)
         print("grid goal ",[grid_goal[0]+north_offset, grid_goal[1]+east_offset])
 
         if self._mp_method == "a_star":
