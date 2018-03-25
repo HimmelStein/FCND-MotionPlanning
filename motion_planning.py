@@ -1,6 +1,7 @@
 import argparse
 import time
 import msgpack
+import random
 from enum import Enum, auto
 
 import numpy as np
@@ -24,13 +25,14 @@ class States(Enum):
 
 class MotionPlanning(Drone):
 
-    def __init__(self, connection):
+    def __init__(self, connection, mp_method):
         super().__init__(connection)
 
         self.target_position = np.array([0.0, 0.0, 0.0])
         self.waypoints = []
         self.in_mission = True
         self.check_state = {}
+        self._mp_method = mp_method
 
         # initial state
         self.flight_state = States.MANUAL
@@ -143,28 +145,44 @@ class MotionPlanning(Drone):
         grid, north_offset, east_offset, polygons = create_grid_polygons(data, TARGET_ALTITUDE, SAFETY_DISTANCE)
         print("North offset = {0}, east offset = {1}".format(north_offset, east_offset))
         # Define starting point on the grid (this is just grid center)
-        grid_start = (-north_offset, -east_offset)
+        # grid_start = (-north_offset, -east_offset)
         # TODO: convert start position to current position rather than map center
         north_start, east_start, down_start = self.local_position
         grid_start = (int(north_start-north_offset), int(east_start-east_offset))
-        
+
         # Set goal as some arbitrary position on the grid
         grid_goal = (-north_offset + 10, -east_offset + 30)
+
         # TODO: adapt to set goal as latitude / longitude position and convert
+        # randomly choose a free cell in the grid as the target
+        # transform it into latitude/longitude position, and print out
+        freeCells = list(np.argwhere(grid==0))
+        grid_goal = tuple(random.shuffle(freeCells)[0])
+        print("grid goal ",[grid_goal+north_offset, grid_goal+east_offset])
 
-        # Run A* to find a path from start to goal
-        # TODO: add diagonal motions with a cost of sqrt(2) to your A* implementation
-        # or move to a different search space such as a graph (not done here)
-        print('Local Start and Goal: ', grid_start, grid_goal)
-        path, _ = a_star(grid, heuristic, grid_start, grid_goal)
+        if self._mp_method == "a_star":
+            # Run A* to find a path from start to goal
+            # TODO: add diagonal motions with a cost of sqrt(2) to your A* implementation
+            # or move to a different search space such as a graph (not done here)
+            print('Local Start and Goal: ', grid_start, grid_goal)
+            path, _ = a_star(grid, heuristic, grid_start, grid_goal)
         
-        # TODO: prune path to minimize number of waypoints
-        # TODO (if you're feeling ambitious): Try a different approach altogether!
+            # TODO: prune path to minimize number of waypoints
+            # TODO (if you're feeling ambitious): Try a different approach altogether!
 
-        prunedPath = prune_path(path, polygons)
+            prunedPath = prune_path(path, polygons)
 
-        # Convert path to waypoints
-        waypoints = [[p[0] + north_offset, p[1] + east_offset, TARGET_ALTITUDE, 0] for p in prunedPath]
+            # Convert path to waypoints
+            waypoints = [[p[0] + north_offset, p[1] + east_offset, TARGET_ALTITUDE, 0] for p in prunedPath]
+        elif self._mp_method == "simplest":
+            pass
+        elif self._mp_method == "medial_axis":
+            pass
+        elif self._mp_method == "pb_map":
+            pass
+        elif self._mp_method == "voronoi":
+            pass
+
         # Set self.waypoints
         self.waypoints = waypoints
         # TODO: send waypoints to sim
@@ -184,13 +202,19 @@ class MotionPlanning(Drone):
 
 
 if __name__ == "__main__":
+    """
+    Usage: 
+    $ python backyard_flyer.py -method a_star|simplest|medial_axis|pb_map|voronoi
+    """
+
     parser = argparse.ArgumentParser()
     parser.add_argument('--port', type=int, default=5760, help='Port number')
     parser.add_argument('--host', type=str, default='127.0.0.1', help="host address, i.e. '127.0.0.1'")
+    parser.add_argument('--method', type=str, default="a_star", help='planning methods')
     args = parser.parse_args()
-
+    method = args.method
     conn = MavlinkConnection('tcp:{0}:{1}'.format(args.host, args.port), timeout=60)
-    drone = MotionPlanning(conn)
+    drone = MotionPlanning(conn, method)
     time.sleep(1)
 
     drone.start()
