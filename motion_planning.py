@@ -151,14 +151,15 @@ class MotionPlanning(Drone):
         grid_start = (int(north_start-north_offset), int(east_start-east_offset))
 
         # Set goal as some arbitrary position on the grid
-        grid_goal = (-north_offset + 10, -east_offset + 30)
+        # grid_goal = (-north_offset + 10, -east_offset + 30)
 
         # TODO: adapt to set goal as latitude / longitude position and convert
         # randomly choose a free cell in the grid as the target
         # transform it into latitude/longitude position, and print out
-        freeCells = list(np.argwhere(grid==0))
-        grid_goal = tuple(random.shuffle(freeCells)[0])
-        print("grid goal ",[grid_goal+north_offset, grid_goal+east_offset])
+        freeCells = [list(cell) for cell in np.argwhere(grid==0)]
+        random.shuffle(freeCells)
+        grid_goal = tuple(freeCells[0])
+        print("grid goal ",[grid_goal[0]+north_offset, grid_goal[1]+east_offset])
 
         if self._mp_method == "a_star":
             # Run A* to find a path from start to goal
