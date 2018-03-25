@@ -3,7 +3,10 @@
 
 
 
-This project is a continuation of the Backyard Flyer project where you executed a simple square shaped flight path. In this project you will integrate the techniques that you have learned throughout the last several lessons to plan a path through an urban environment. Check out the [project rubric](https://review.udacity.com/#!/rubrics/1534/view) for more detail on what constitutes a passing submission.
+This project is a continuation of the Backyard Flyer project where you executed a simple square shaped flight path.
+In this project you will integrate the techniques that you have learned throughout the last several lessons to plan
+a path through an urban environment. Check out the [project rubric](https://review.udacity.com/#!/rubrics/1534/view)
+for more detail on what constitutes a passing submission.
 
 ## Option to do this project in a GPU backed virtual machine in the Udacity classroom!
 Rather than downloading the simulator and starter files you can simply complete this project in a virual workspace in the Udacity classroom! Follow [these instructions](https://classroom.udacity.com/nanodegrees/nd787/parts/5aa0a956-4418-4a41-846f-cb7ea63349b3/modules/0c12632a-b59a-41c1-9694-2b3508f47ce7/lessons/5f628104-5857-4a3f-93f0-d8a53fe6a8fd/concepts/ab09b378-f85f-49f4-8845-d59025dd8a8e?contentVersion=1.0.0&contentLocale=en-us) to proceed with the VM. 
@@ -35,14 +38,18 @@ For this project, you are provided with two scripts, `motion_planning.py` and `p
 
 ### Step 6: Explain what's going on in  `motion_planning.py` and `planning_utils.py`
 
-`motion_planning.py` is basically a modified version of `backyard_flyer.py` that leverages some extra functions in `planning_utils.py`. It should work right out of the box.  Try running `motion_planning.py` to see what it does. To do this, first start up the simulator, then at the command line:
+`motion_planning.py` is basically a modified version of `backyard_flyer.py` that leverages some extra functions in
+`planning_utils.py`. It should work right out of the box.  Try running `motion_planning.py` to see what it does.
+To do this, first start up the simulator, then at the command line:
  
 ```sh
 source activate fcnd # if you haven't already sourced your Python environment, do so now.
 python motion_planning.py
 ```
 
-You should see the quad fly a jerky path of waypoints to the northeast for about 10 m then land.  What's going on here? Your first task in this project is to explain what's different about `motion_planning.py` from the `backyard_flyer_solution.py` script, and how the functions provided in `planning_utils.py` work. 
+You should see the quad fly a jerky path of waypoints to the northeast for about 10 m then land.  What's going on here?
+Your first task in this project is to explain what's different about `motion_planning.py` from
+the `backyard_flyer_solution.py` script, and how the functions provided in `planning_utils.py` work.
 
 ### Step 7: Write your planner
 

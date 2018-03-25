@@ -1,9 +1,85 @@
 from enum import Enum
 from queue import PriorityQueue
+from shapely.geometry import Polygon, LineString, Point
+from sklearn.neighbors import KDTree
+from copy import deepcopy
 import numpy as np
 
 
-def create_grid(data, drone_altitude, safety_distance):
+def find_waypoints_from_to(path, waypoint, to=()):
+    idx0 = path.index(waypoint)
+    idx1 = path.index(to)
+    return path[idx0:idx1+1]
+
+
+def next_waypoint_of(waypoint, path=[]):
+    idx = path.index(waypoint)
+    if idx < len(path)-2:
+        return path[idx+1]
+    else:
+        return []
+
+
+def before_waypoint_of(waypoint, path=[]):
+    idx = path.index(waypoint)
+    if idx >0:
+        return path[idx-1]
+    else:
+        return []
+
+
+def prune_path(path, polygons):
+    """
+    let path start with ptStart, end with ptEnd
+    draw a straight line segment between ptStart and ptEnd, (ptStart, ptEnd),
+    if (ptStart, ptEnd) across polygon, pg:
+        find ptx on path nearest to pg
+        if the line segment (ptStart,ptx) not across pg:
+            path1 = find_waypoints_from_to(path, ptStart, to=ptx)
+            p3 = next_waypoint_of(ptx, path=path)
+            path3 = find_waypoints_from_to(path, p3, to=ptEnd)
+            return prune_path(path1, polygons) + (p1,p3)+prune_path(path3, polygons)
+        if the line segment (ptx,ptEnd) not across pg:
+            path2 = find_waypoints_from_to(path, ptx, to=ptEnd)
+            p4 = before_waypoint_of(ptx, path=path)
+            path2 = find_waypoints_from_to(path, ptStart, to=p4)
+            return prune_path(path2, polygons) + (p4,ptx)+prune_path(path2, polygons)
+    return (ptStart, ptEnd)
+    :param path:
+    :param polygons:
+    :return:
+    """
+    ptStart, ptEnd = path[0], path[-1]
+    ln = LineString([ptStart, ptEnd])
+    polygon = None
+    while polygons:
+        pg = polygons.pop(0)
+        if pg.crosses(ln):
+            polygon = pg
+            break
+    if polygon:
+        boundary = polygon.boundary
+        onePoint = [pt.xy for pt in boundary.intersection(ln)][0]
+        point = [list(e)[0] for e in onePoint]
+        tree = KDTree(path)
+        idx = tree.query([point], 1, return_distance=False)[0][0]
+        print(idx)
+        ptx = path[idx]
+        if not polygon.crosses(LineString([ptStart, ptx])):
+            path1 = find_waypoints_from_to(path, ptStart, to=ptx)
+            p3 = next_waypoint_of(ptx, path=path)
+            path3 = find_waypoints_from_to(path, p3, to=ptEnd)
+            return prune_path(path1, polygons) + prune_path(path3, polygons)
+        if not polygon.crosses(LineString([ptx, ptEnd])):
+            p2 = before_waypoint_of(ptx, path=path)
+            path2 = find_waypoints_from_to(path, ptStart, to=p2)
+            path4 = find_waypoints_from_to(path, ptx, to=ptEnd)
+            return prune_path(path2, polygons) +  prune_path(path4, polygons)
+    else:
+        return [ptStart, ptEnd]
+
+
+def create_grid_polygons(data, drone_altitude, safety_distance):
     """
     Returns a grid representation of a 2D configuration space
     based on given obstacle data, drone altitude and safety distance
@@ -26,6 +102,9 @@ def create_grid(data, drone_altitude, safety_distance):
     # Initialize an empty grid
     grid = np.zeros((north_size, east_size))
 
+    # Initialize polygons
+    polygons = []
+
     # Populate the grid with obstacles
     for i in range(data.shape[0]):
         north, east, alt, d_north, d_east, d_alt = data[i, :]
@@ -37,8 +116,10 @@ def create_grid(data, drone_altitude, safety_distance):
                 int(np.clip(east + d_east + safety_distance - east_min, 0, east_size-1)),
             ]
             grid[obstacle[0]:obstacle[1]+1, obstacle[2]:obstacle[3]+1] = 1
-
-    return grid, int(north_min), int(east_min)
+            plg = Polygon([(obstacle[0],obstacle[3]+1), (obstacle[1]+1,obstacle[3]+1),
+                           (obstacle[1] + 1, obstacle[2] + 1), (obstacle[0],obstacle[2]+1)])
+            polygons.append(plg)
+    return grid, int(north_min), int(east_min), polygons
 
 
 # Assume all actions cost the same.
@@ -139,6 +220,7 @@ def a_star(grid, h, start, goal):
         print('**********************') 
     return path[::-1], path_cost
 
+
 def heuristic(position, goal_position):
-    return np.linalg.norm(np.array(position) - np.array(goal_position))
+    return np.sqrt((position[0] - goal_position[0])**2 + (position[1]-goal_position[1])**2)
 

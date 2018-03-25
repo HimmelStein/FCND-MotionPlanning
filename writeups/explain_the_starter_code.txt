@@ -1,0 +1,35 @@
+motion_planing.py and backyard_flyer_solution.py are successfully tested on MacOS.
+
+in motion_planning.py, the drone is following a zig-zag path; while in backyard_flyer_solution.py the drone is following
+a square.
+
+# compare them side by side and describe in words how each of the modifications implemented in motion_planning.py
+# is functioning.
+# The goal here is to understand the starter code. We've provided you with a functional yet super basic path planning
+# implementation and in this step, your task is to explain how it works! Have a look at the code, particularly in the
+# plan_path() method and functions provided in planning_utils.py and describe what's going on there. This need not be
+# a lengthy essay, just a concise description of the functionality of the starter code.
+
+motion_planning.py has one more State value, PLANNING, than backyard_flyer_solution.py
+All State values in motion_planning.py are set by the auto() function; all states in backyard_flyer_solution.py are set
+manually.
+
+motion_planning.py and backyard_flyer_solution.py have the same initializing function, the same local_position_callback,
+the same velocity_callback function, the same waypoint_transition function, the same landing_transition function, \
+the same disarming_transition function, the same manual_transition function,
+
+Their state_callback functions are slightly different: in backyard_flyer_solution.py, if the drone is armed, it will
+switch to take off; in motion_planning.py, if the drone is armed, it will do planning before taking off.
+
+backyard_flyer_solution.py has calculate_box function, which produces a fixed square path;
+motion_planning.py has plan_path function, which produces a more complicated path on demand.
+
+In backyard_flyer_solution.py, the arming_transition function needs to set home_position as target location;
+in motion_planning.py, the arming_transition function does not set home_position as target location;
+
+In backyard_flyer_solution.py, takeoff_transition function has a fixed target_altitude;
+in motion_planning.py, takeoff_transition function does not have fixed target_altitude.
+
+motion_planning.py has send_waypoints function, which sends targets along the path to the drone,
+while backyard_flyer_solution.py does not have.
+
