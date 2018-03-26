@@ -4,6 +4,7 @@ from shapely.geometry import Polygon, LineString, Point
 from sklearn.neighbors import KDTree
 from copy import deepcopy
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 def find_waypoints_from_to(path, waypoint, to=()):
@@ -28,56 +29,40 @@ def before_waypoint_of(waypoint, path=[]):
         return []
 
 
-def prune_path(path, polygons):
+def prune_path(path, polygons, debug=False):
     """
-    ptStart, ptEnd = path[0], path[-1]
-    ln = LineString([ptStart, ptEnd])
-    polygon = None
-    while polygons:
-        pg = polygons.pop(0)
-        if pg.crosses(ln):
-            polygon = pg
-            break
-    if polygon:
-        boundary = polygon.boundary
-        onePoint = [pt.xy for pt in boundary.intersection(ln)][0]
-        point = [list(e)[0] for e in onePoint]
-        tree = KDTree(path)
-        idx = tree.query([point], 1, return_distance=False)[0][0]
-        print(idx)
-        ptx = path[idx]
-        if not polygon.crosses(LineString([ptStart, ptx])):
-            path1 = find_waypoints_from_to(path, ptStart, to=ptx)
-            p3 = next_waypoint_of(ptx, path=path)
-            path3 = find_waypoints_from_to(path, p3, to=ptEnd)
-            return prune_path(path1, polygons) + prune_path(path3, polygons)
-        if not polygon.crosses(LineString([ptx, ptEnd])):
-            p2 = before_waypoint_of(ptx, path=path)
-            path2 = find_waypoints_from_to(path, ptStart, to=p2)
-            path4 = find_waypoints_from_to(path, ptx, to=ptEnd)
-            return prune_path(path2, polygons) +  prune_path(path4, polygons)
-    else:
-        return [ptStart, ptEnd]
-
     :param path:
     :param polygons:
     :return:
     """
-    ptStart = path[0]
-    result = [ptStart]
-    idx = 1
-    while idx < len(path) - 1:
-        ptx = path[idx]
-        ln = LineString([ptStart, ptx])
-        canConnect = True
-        for polygon in polygons:
-            if polygon.crosses(ln):
-                canConnect = False
-                break
-        if not canConnect:
-            result.append(path[idx - 1])
-            ptStart = path[idx]
-        idx += 1
+    while True:
+        startIdx = 0
+        ptStart = path[startIdx]
+        result = [ptStart]
+        idx = 1
+        while idx <= len(path) - 1:
+            print(idx, len(path))
+            ptx = path[idx]
+            ln = LineString([ptStart, ptx])
+            canConnect = True
+            for polygon in polygons:
+                if polygon.crosses(ln):
+                    canConnect = False
+                    if debug:
+                        plot_collider(polygon, ln, polygons, path)
+                        print(polygon.boundary.xy)
+                        print(ln.xy)
+                    break
+            if not canConnect:
+                startIdx = idx - 1
+                result.append(path[startIdx])
+                ptStart = path[startIdx]
+            idx += 1
+        result.append(path[-1])
+        if len(path) == len(result):
+            break
+        else:
+            path = result
     result.append(path[-1])
     return result
 
@@ -119,10 +104,10 @@ def create_grid_polygons(data, drone_altitude, safety_distance):
                 int(np.clip(east + d_east + safety_distance - east_min, 0, east_size-1)),
             ]
             grid[obstacle[0]:obstacle[1]+1, obstacle[2]:obstacle[3]+1] = 1
-            plg = Polygon([(obstacle[0],obstacle[3]+1),
-                           (obstacle[1]+1,obstacle[3]+1),
-                           (obstacle[1] + 1, obstacle[2] + 1),
-                           (obstacle[0],obstacle[2]+1)])
+            plg = Polygon([(obstacle[2],obstacle[0]),
+                           (obstacle[3]+1,obstacle[0]),
+                           (obstacle[3]+1, obstacle[1]+1),
+                           (obstacle[2],obstacle[1]+1)])
             polygons.append(plg)
     return grid, int(north_min), int(east_min), polygons
 
@@ -174,13 +159,13 @@ def valid_actions(grid, current_node):
     return valid_actions
 
 
-def a_star(grid, h, start, goal):
+def a_star(grid, h, start, goal, ploygons, debug=False):
     """
     Given a grid and heuristic function returns
     the lowest cost path from start to goal.
     """
 
-    path = []
+    path, prunedPath = [], []
     path_cost = 0
     queue = PriorityQueue()
     queue.put((0, start))
@@ -207,7 +192,6 @@ def a_star(grid, h, start, goal):
                 if next_node not in visited:
                     visited.add(next_node)
                     queue.put((new_cost, next_node))
-
                     branch[next_node] = (new_cost, current_node, a)
 
     if found:
@@ -215,17 +199,57 @@ def a_star(grid, h, start, goal):
         n = goal
         path_cost = branch[n][0]
         path.append(goal)
+        prunedPath.append(goal)
+        lastAction = branch[n][2]
         while branch[n][1] != start:
             path.append(branch[n][1])
             n = branch[n][1]
+            if branch[n][2] != lastAction:
+                prunedPath.append(branch[n][1])
+                lastAction = branch[n][2]
         path.append(branch[n][1])
+        prunedPath.append(branch[n][1])
     else:
         print('**********************')
         print('Failed to find a path!')
-        print('**********************') 
-    return path[::-1], path_cost
+        print('**********************')
+    if debug:
+        path0 = [ele[::-1] for ele in path]
+        plot_path(path0, ploygons)
+    return path[::-1], path_cost, prunedPath[::-1]
 
 
 def heuristic(position, goal_position):
     return np.sqrt((position[0] - goal_position[0])**2 + (position[1]-goal_position[1])**2)
+
+
+def show_grid(grid):
+    plt.imshow(grid, cmap='Greys', origin='lower')
+    plt.xlabel('EAST')
+    plt.ylabel('NORTH')
+    plt.show()
+
+
+def plot_path(path, ploygons):
+    for pg in ploygons:
+        x0, y0 = pg.exterior.xy
+        plt.plot(x0, y0, 'blue', alpha=0.5)
+    x,y = [ele[0] for ele in path], [ele[1] for ele in path]
+    plt.plot(x,y, 'red', alpha=0.5)
+    plt.show()
+
+
+def plot_collider(plg, line, ploygons, path):
+    for pg in ploygons:
+        x0, y0 = pg.exterior.xy
+        plt.plot(x0, y0, 'blue', alpha=0.5)
+    x,y = plg.exterior.xy
+    x1,y1 = line.xy
+    plt.plot(x,y, 'blue', alpha=0.5)
+    plt.plot(y1,x1, 'red', alpha=0.5)
+    path = [ele[::-1] for ele in path]
+    x,y = [ele[0] for ele in path], [ele[1] for ele in path]
+    plt.plot(x, y, 'black', alpha=0.5)
+    plt.show()
+
 

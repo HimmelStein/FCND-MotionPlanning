@@ -3,10 +3,10 @@ import time
 import msgpack
 import random
 from enum import Enum, auto
-
+from shapely.geometry import LineString, Polygon
 import numpy as np
 
-from planning_utils import a_star, heuristic, create_grid_polygons, prune_path
+from planning_utils import a_star, heuristic, create_grid_polygons, prune_path, show_grid
 from udacidrone import Drone
 from udacidrone.connection import MavlinkConnection
 from udacidrone.messaging import MsgID
@@ -25,7 +25,7 @@ class States(Enum):
 
 class MotionPlanning(Drone):
 
-    def __init__(self, connection, mp_method):
+    def __init__(self, connection, mp_method, pruneLevel, debug):
         super().__init__(connection)
 
         self.target_position = np.array([0.0, 0.0, 0.0])
@@ -33,6 +33,8 @@ class MotionPlanning(Drone):
         self.in_mission = True
         self.check_state = {}
         self._mp_method = mp_method
+        self._prune_level = pruneLevel
+        self._debug = debug
 
         # initial state
         self.flight_state = States.MANUAL
@@ -118,7 +120,7 @@ class MotionPlanning(Drone):
         self.flight_state = States.PLANNING
         print("Searching for a path ...")
         TARGET_ALTITUDE = 7
-        SAFETY_DISTANCE = 5
+        SAFETY_DISTANCE = 8
 
         self.target_position[2] = TARGET_ALTITUDE
 
@@ -145,6 +147,7 @@ class MotionPlanning(Drone):
         # Define a grid for a particular altitude and safety margin around obstacles
         grid, north_offset, east_offset, polygons = create_grid_polygons(data, TARGET_ALTITUDE, SAFETY_DISTANCE)
         print("North offset = {0}, east offset = {1}".format(north_offset, east_offset))
+        # show_grid(grid)
         # Define starting point on the grid (this is just grid center)
         # grid_start = (-north_offset, -east_offset)
         # TODO: convert start position to current position rather than map center
@@ -160,7 +163,7 @@ class MotionPlanning(Drone):
         freeCells = [list(cell) for cell in np.argwhere(grid==0)]
         random.shuffle(freeCells)
         grid_goal = tuple(freeCells[0])
-        # grid_goal = (336-north_offset, 462-east_offset)
+        grid_goal = (-308-north_offset, 55-east_offset)
         print("grid goal ",[grid_goal[0]+north_offset, grid_goal[1]+east_offset])
 
         if self._mp_method == "a_star":
@@ -168,17 +171,18 @@ class MotionPlanning(Drone):
             # TODO: add diagonal motions with a cost of sqrt(2) to your A* implementation
             # or move to a different search space such as a graph (not done here)
             print('Local Start and Goal: ', grid_start, grid_goal)
-            path, _ = a_star(grid, heuristic, grid_start, grid_goal)
+            path, _, prunedPath = a_star(grid, heuristic, grid_start, grid_goal, polygons, debug=self._debug)
         
             # TODO: prune path to minimize number of waypoints
             # TODO (if you're feeling ambitious): Try a different approach altogether!
-            # print(path)
-            path = prune_path(path, polygons)
-            # print(path)
 
-
-            # Convert path to waypoints
-            waypoints = [[int(p[0] + north_offset), int(p[1] + east_offset), TARGET_ALTITUDE, 0] for p in path]
+            if self._prune_level == 2:
+                path = prune_path(prunedPath, polygons, debug=self._debug)
+                waypoints = [[int(p[0] + north_offset), int(p[1] + east_offset), TARGET_ALTITUDE, 0] for p in path]
+            elif self._prune_level == 1:
+                waypoints = [[int(p[0] + north_offset), int(p[1] + east_offset), TARGET_ALTITUDE, 0] for p in prunedPath]
+            elif self._prune_level == 0:
+                waypoints = [[int(p[0] + north_offset), int(p[1] + east_offset), TARGET_ALTITUDE, 0] for p in path]
 
         elif self._mp_method == "simplest":
             pass
@@ -210,17 +214,22 @@ class MotionPlanning(Drone):
 if __name__ == "__main__":
     """
     Usage: 
-    $ python backyard_flyer.py -method a_star|simplest|medial_axis|pb_map|voronoi
+    $ python motion_planning.py --method a_star|simplest|medial_axis|pb_map|voronoi
+                                --prune_level 0|1|2 
+                                --debug False|True
     """
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--port', type=int, default=5760, help='Port number')
     parser.add_argument('--host', type=str, default='127.0.0.1', help="host address, i.e. '127.0.0.1'")
     parser.add_argument('--method', type=str, default="a_star", help='planning methods')
+    parser.add_argument('--prune_level', type=int, default=2,
+                        help='level of prune for a_star result, 0: no prune, 1: partial prune, 2: full prune')
+    parser.add_argument('--debug', type=bool, default=False)
     args = parser.parse_args()
-    method = args.method
+    method, pruneLevel, debug = args.method, args.prune_level, args.debug
     conn = MavlinkConnection('tcp:{0}:{1}'.format(args.host, args.port), timeout=60)
-    drone = MotionPlanning(conn, method)
+    drone = MotionPlanning(conn, method, pruneLevel, debug)
     time.sleep(1)
 
     drone.start()
