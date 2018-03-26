@@ -6,11 +6,11 @@ from enum import Enum, auto
 from shapely.geometry import LineString, Polygon
 import numpy as np
 
-from planning_utils import a_star, heuristic, create_grid_polygons, prune_path, show_grid
+from planning_utils import a_star, heuristic, create_grid_polygons, prune_path
 from udacidrone import Drone
 from udacidrone.connection import MavlinkConnection
 from udacidrone.messaging import MsgID
-from udacidrone.frame_utils import global_to_local
+from udacidrone.frame_utils import global_to_local, local_to_global
 
 
 class States(Enum):
@@ -164,8 +164,9 @@ class MotionPlanning(Drone):
         freeCells = [list(cell) for cell in np.argwhere(grid==0)]
         random.shuffle(freeCells)
         grid_goal = tuple(freeCells[0])
-        grid_goal = (479-north_offset, 288-east_offset)
-        print("grid goal ",[grid_goal[0]+north_offset, grid_goal[1]+east_offset])
+        # grid_goal = (479-north_offset, 288-east_offset)
+        global_position = local_to_global((grid_goal[0]+north_offset, grid_goal[1]+east_offset, 0), self.global_home)
+        print("goal positon:",global_position)
 
         if self._mp_method == "a_star":
             # Run A* to find a path from start to goal
