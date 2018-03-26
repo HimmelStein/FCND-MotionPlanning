@@ -240,6 +240,8 @@ def a_star(grid, h, start, goal, ploygons, debug=False):
         print('**********************')
         print('Failed to find a path!')
         print('**********************')
+        plot_path([start, goal], ploygons)
+        return [], -1, []
     if debug:
         path0 = [ele[::-1] for ele in path]
         plot_path(path0, ploygons)

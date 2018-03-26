@@ -165,7 +165,7 @@ class MotionPlanning(Drone):
         freeCells = [list(cell) for cell in np.argwhere(grid==0)]
         random.shuffle(freeCells)
         grid_goal = tuple(freeCells[0])
-        # grid_goal = (479-north_offset, 288-east_offset)
+        # grid_goal = (7-north_offset, 789-east_offset)
         global_position = local_to_global((grid_goal[0]+north_offset, grid_goal[1]+east_offset, 0), self.global_home)
         print("goal positon:",global_position)
 
@@ -175,9 +175,10 @@ class MotionPlanning(Drone):
             # or move to a different search space such as a graph (not done here)
             print('Local Start and Goal: ', grid_start, grid_goal)
             print('performing a-star search....')
-            path, _, prunedPath = a_star(grid, heuristic, grid_start, grid_goal, polygons,
+            path, cost, prunedPath = a_star(grid, heuristic, grid_start, grid_goal, polygons,
                                          debug=self._debug)
-        
+            if cost == -1:
+                return
             # TODO: prune path to minimize number of waypoints
             # TODO (if you're feeling ambitious): Try a different approach altogether!
 
