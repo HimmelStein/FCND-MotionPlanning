@@ -3,13 +3,6 @@ motion_planing.py and backyard_flyer_solution.py are successfully tested on MacO
 in motion_planning.py, the drone is following a zig-zag path; while in backyard_flyer_solution.py the drone is following
 a square.
 
-# compare them side by side and describe in words how each of the modifications implemented in motion_planning.py
-# is functioning.
-# The goal here is to understand the starter code. We've provided you with a functional yet super basic path planning
-# implementation and in this step, your task is to explain how it works! Have a look at the code, particularly in the
-# plan_path() method and functions provided in planning_utils.py and describe what's going on there. This need not be
-# a lengthy essay, just a concise description of the functionality of the starter code.
-
 motion_planning.py has one more State value, PLANNING, than backyard_flyer_solution.py
 All State values in motion_planning.py are set by the auto() function; all states in backyard_flyer_solution.py are set
 manually.
@@ -32,4 +25,9 @@ in motion_planning.py, takeoff_transition function does not have fixed target_al
 
 motion_planning.py has send_waypoints function, which sends targets along the path to the drone,
 while backyard_flyer_solution.py does not have.
+
+MotionPlanning class in motion_planning.py has send_waypoints() method, which sends path information to the simulator,
+so that a path cannot be visualized in the simulated environment.
+
+
 

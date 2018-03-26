@@ -35,7 +35,7 @@ class MotionPlanning(Drone):
         self._mp_method = mp_method
         self._prune_level = pruneLevel
         self._debug = debug
-        self._nodeId = nodeId 
+        self._nodeId = nodeId
 
         # initial state
         self.flight_state = States.MANUAL
@@ -174,6 +174,7 @@ class MotionPlanning(Drone):
             # TODO: add diagonal motions with a cost of sqrt(2) to your A* implementation
             # or move to a different search space such as a graph (not done here)
             print('Local Start and Goal: ', grid_start, grid_goal)
+            print('performing a-star search....')
             path, _, prunedPath = a_star(grid, heuristic, grid_start, grid_goal, polygons,
                                          debug=self._debug)
         
@@ -184,6 +185,8 @@ class MotionPlanning(Drone):
                 path = prune_path(prunedPath, polygons, debug=self._debug, nodeId = self._nodeId)
                 waypoints = [[int(p[0] + north_offset), int(p[1] + east_offset), TARGET_ALTITUDE, 0] for p in path]
             elif self._prune_level == 1:
+                print("level 1 pruning is performed.")
+                print("Turning points are reduced from {} to {}".format(len(path), len(prunedPath)))
                 waypoints = [[int(p[0] + north_offset), int(p[1] + east_offset), TARGET_ALTITUDE, 0] for p in prunedPath]
             elif self._prune_level == 0:
                 waypoints = [[int(p[0] + north_offset), int(p[1] + east_offset), TARGET_ALTITUDE, 0] for p in path]
@@ -219,8 +222,7 @@ if __name__ == "__main__":
     """
     Usage: 
     $ python motion_planning.py --prune_level 0|1|2 
-                                --debug True
-                                --actual True
+                                --debug True 
     """
 
     parser = argparse.ArgumentParser()
