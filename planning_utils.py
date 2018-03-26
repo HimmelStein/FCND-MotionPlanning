@@ -39,6 +39,7 @@ def prune_path(path, polygons, debug=False):
     ptStart = path[startIdx]
     result = [ptStart]
     print('length of original path:', len(path))
+    print('pruning path...')
     while True:
         idx = startIdx + 1
         nextIdx = startIdx + 1
@@ -52,7 +53,7 @@ def prune_path(path, polygons, debug=False):
             for polygon in polygons:
                 if polygon.crosses(ln):
                     canConnect = False
-                    if debug and startIdx ==5:
+                    if debug and startIdx==11:
                         plot_collider(polygon, ln, polygons, path)
                         print(polygon.boundary.xy)
                         print(ln.xy)
@@ -62,6 +63,7 @@ def prune_path(path, polygons, debug=False):
                 nextIdx = idx + i
 
         startIdx = nextIdx
+        print(startIdx)
         ptStart = path[startIdx]
         result.append(ptStart)
         if startIdx == len(path) -1:
@@ -249,7 +251,7 @@ def plot_collider(plg, line, ploygons, path):
     x,y = plg.exterior.xy
     x1,y1 = line.xy
     plt.plot(x,y, 'blue', alpha=0.5)
-    plt.plot(y1,x1, 'red', alpha=0.5)
+    plt.plot(x1,y1, 'red', alpha=0.5)
     path = [ele[::-1] for ele in path]
     x,y = [ele[0] for ele in path], [ele[1] for ele in path]
     plt.plot(x, y, 'black', alpha=0.5)
