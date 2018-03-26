@@ -228,7 +228,7 @@ if __name__ == "__main__":
     parser.add_argument('--method', type=str, default="a_star", help='planning methods')
     parser.add_argument('--prune_level', type=int, default=2,
                         help='level of prune for a_star result, 0: no prune, 1: partial prune, 2: full prune')
-    parser.add_argument('--debug', type=bool, default=True)
+    parser.add_argument('--debug', type=bool, default=False)
     parser.add_argument('--nodeId',type=int, default=-1, help='the i-th node on the path')
     args = parser.parse_args()
     method, pruneLevel, debug, nodeId = args.method, args.prune_level, args.debug, args.nodeId

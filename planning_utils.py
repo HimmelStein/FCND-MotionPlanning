@@ -40,6 +40,14 @@ def prune_path(path, polygons, debug=False, nodeId=-1):
     result = [ptStart]
     print('length of original path:', len(path))
     print('pruning path...')
+
+    path0 = [ele[::-1] for ele in path]
+    pathClousre = LineString(path0).convex_hull
+    plgs = []
+    for polygon in polygons:
+        if polygon.intersects(pathClousre):
+            plgs.append(polygon)
+
     while True:
         idx = startIdx + 1
         nextIdx = startIdx + 1
@@ -50,7 +58,7 @@ def prune_path(path, polygons, debug=False, nodeId=-1):
             ptx = path[idx+i]
             ln = LineString([ptStart[::-1], ptx[::-1]])
             canConnect = True
-            for polygon in polygons:
+            for polygon in plgs:
                 if polygon.crosses(ln):
                     canConnect = False
                     if debug and startIdx==nodeId:
