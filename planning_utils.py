@@ -35,13 +35,12 @@ def prune_path(path, polygons, debug=False):
     :param polygons:
     :return:
     """
+    startIdx = 0
+    ptStart = path[startIdx]
+    result = [ptStart]
     while True:
-        startIdx = 0
-        ptStart = path[startIdx]
-        result = [ptStart]
-        idx = 1
+        idx = startIdx + 1
         while idx <= len(path) - 1:
-            print(idx, len(path))
             ptx = path[idx]
             ln = LineString([ptStart, ptx])
             canConnect = True
@@ -52,18 +51,17 @@ def prune_path(path, polygons, debug=False):
                         plot_collider(polygon, ln, polygons, path)
                         print(polygon.boundary.xy)
                         print(ln.xy)
-                    break
-            if not canConnect:
-                startIdx = idx - 1
-                result.append(path[startIdx])
-                ptStart = path[startIdx]
+                    break # for polygon
+
+            if canConnect:
+                nextIdx = idx
             idx += 1
-        result.append(path[-1])
-        if len(path) == len(result):
+        startIdx = nextIdx
+        print(startIdx)
+        ptStart = path[startIdx]
+        result.append(ptStart)
+        if startIdx == len(path) -1:
             break
-        else:
-            path = result
-    result.append(path[-1])
     return result
 
 
