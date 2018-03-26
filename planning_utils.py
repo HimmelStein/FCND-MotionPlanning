@@ -29,7 +29,7 @@ def before_waypoint_of(waypoint, path=[]):
         return []
 
 
-def prune_path(path, polygons, debug=False):
+def prune_path(path, polygons, debug=False, nodeId=-1):
     """
     :param path:
     :param polygons:
@@ -53,7 +53,7 @@ def prune_path(path, polygons, debug=False):
             for polygon in polygons:
                 if polygon.crosses(ln):
                     canConnect = False
-                    if debug and startIdx in [54, 88]:
+                    if debug and startIdx==nodeId:
                         plot_collider(polygon, ln, polygons, path)
                         print(polygon.boundary.xy)
                         print(ln.xy)
@@ -63,7 +63,7 @@ def prune_path(path, polygons, debug=False):
                 nextIdx = idx + i
 
         startIdx = nextIdx
-        print(startIdx)
+        print('select a turning point:', startIdx)
         ptStart = path[startIdx]
         result.append(ptStart)
         if startIdx == len(path) -1:

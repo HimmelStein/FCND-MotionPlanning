@@ -25,7 +25,7 @@ class States(Enum):
 
 class MotionPlanning(Drone):
 
-    def __init__(self, connection, mp_method, pruneLevel, debug):
+    def __init__(self, connection, mp_method, pruneLevel, debug, nodeId):
         super().__init__(connection)
 
         self.target_position = np.array([0.0, 0.0, 0.0])
@@ -35,6 +35,7 @@ class MotionPlanning(Drone):
         self._mp_method = mp_method
         self._prune_level = pruneLevel
         self._debug = debug
+        self._nodeId = nodeId
 
         # initial state
         self.flight_state = States.MANUAL
@@ -171,13 +172,14 @@ class MotionPlanning(Drone):
             # TODO: add diagonal motions with a cost of sqrt(2) to your A* implementation
             # or move to a different search space such as a graph (not done here)
             print('Local Start and Goal: ', grid_start, grid_goal)
-            path, _, prunedPath = a_star(grid, heuristic, grid_start, grid_goal, polygons, debug=self._debug)
+            path, _, prunedPath = a_star(grid, heuristic, grid_start, grid_goal, polygons,
+                                         debug=self._debug)
         
             # TODO: prune path to minimize number of waypoints
             # TODO (if you're feeling ambitious): Try a different approach altogether!
 
             if self._prune_level == 2:
-                path = prune_path(prunedPath, polygons, debug=self._debug)
+                path = prune_path(prunedPath, polygons, debug=self._debug, nodeId = self._nodeId)
                 waypoints = [[int(p[0] + north_offset), int(p[1] + east_offset), TARGET_ALTITUDE, 0] for p in path]
             elif self._prune_level == 1:
                 waypoints = [[int(p[0] + north_offset), int(p[1] + east_offset), TARGET_ALTITUDE, 0] for p in prunedPath]
@@ -226,10 +228,11 @@ if __name__ == "__main__":
     parser.add_argument('--prune_level', type=int, default=2,
                         help='level of prune for a_star result, 0: no prune, 1: partial prune, 2: full prune')
     parser.add_argument('--debug', type=bool, default=True)
+    parser.add_argument('--nodeId',type=int, default=-1, help='the i-th node on the path')
     args = parser.parse_args()
-    method, pruneLevel, debug = args.method, args.prune_level, args.debug
+    method, pruneLevel, debug, nodeId = args.method, args.prune_level, args.debug, args.nodeId
     conn = MavlinkConnection('tcp:{0}:{1}'.format(args.host, args.port), timeout=60)
-    drone = MotionPlanning(conn, method, pruneLevel, debug)
+    drone = MotionPlanning(conn, method, pruneLevel, debug, nodeId)
     time.sleep(1)
 
     drone.start()
