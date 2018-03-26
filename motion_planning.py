@@ -35,7 +35,7 @@ class MotionPlanning(Drone):
         self._mp_method = mp_method
         self._prune_level = pruneLevel
         self._debug = debug
-        self._nodeId = nodeId
+        self._nodeId = nodeId 
 
         # initial state
         self.flight_state = States.MANUAL
@@ -131,6 +131,7 @@ class MotionPlanning(Drone):
                 if ln.startswith('lat0'):
                     lst = ln.split(' ')
                     lat0, lon0 = [float(ele) for ele in [lst[1].strip(','), lst[3]]]
+                    break
         
         # TODO: set home position to (lon0, lat0, 0)
         self.set_home_position(lon0, lat0, 0)
@@ -217,9 +218,9 @@ class MotionPlanning(Drone):
 if __name__ == "__main__":
     """
     Usage: 
-    $ python motion_planning.py --method a_star|simplest|medial_axis|pb_map|voronoi
-                                --prune_level 0|1|2 
-                                --debug False|True
+    $ python motion_planning.py --prune_level 0|1|2 
+                                --debug True
+                                --actual True
     """
 
     parser = argparse.ArgumentParser()
@@ -231,7 +232,7 @@ if __name__ == "__main__":
     parser.add_argument('--debug', type=bool, default=False)
     parser.add_argument('--nodeId',type=int, default=-1, help='the i-th node on the path')
     args = parser.parse_args()
-    method, pruneLevel, debug, nodeId = args.method, args.prune_level, args.debug, args.nodeId
+    method, pruneLevel, debug, nodeId  = args.method, args.prune_level, args.debug, args.nodeId
     conn = MavlinkConnection('tcp:{0}:{1}'.format(args.host, args.port), timeout=60)
     drone = MotionPlanning(conn, method, pruneLevel, debug, nodeId)
     time.sleep(1)
