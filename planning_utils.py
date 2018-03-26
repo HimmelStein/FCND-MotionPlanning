@@ -53,7 +53,7 @@ def prune_path(path, polygons, debug=False):
             for polygon in polygons:
                 if polygon.crosses(ln):
                     canConnect = False
-                    if debug and startIdx==11:
+                    if debug and startIdx in [11, 15, 24, 32, 33, 37,41, 45, 54, 88]:
                         plot_collider(polygon, ln, polygons, path)
                         print(polygon.boundary.xy)
                         print(ln.xy)
