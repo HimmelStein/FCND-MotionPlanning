@@ -163,7 +163,7 @@ class MotionPlanning(Drone):
         freeCells = [list(cell) for cell in np.argwhere(grid==0)]
         random.shuffle(freeCells)
         grid_goal = tuple(freeCells[0])
-        grid_goal = (-308-north_offset, 55-east_offset)
+        # grid_goal = (-308-north_offset, 55-east_offset)
         print("grid goal ",[grid_goal[0]+north_offset, grid_goal[1]+east_offset])
 
         if self._mp_method == "a_star":
@@ -225,7 +225,7 @@ if __name__ == "__main__":
     parser.add_argument('--method', type=str, default="a_star", help='planning methods')
     parser.add_argument('--prune_level', type=int, default=2,
                         help='level of prune for a_star result, 0: no prune, 1: partial prune, 2: full prune')
-    parser.add_argument('--debug', type=bool, default=True)
+    parser.add_argument('--debug', type=bool, default=False)
     args = parser.parse_args()
     method, pruneLevel, debug = args.method, args.prune_level, args.debug
     conn = MavlinkConnection('tcp:{0}:{1}'.format(args.host, args.port), timeout=60)
