@@ -107,10 +107,10 @@ def create_grid_polygons(data, drone_altitude, safety_distance):
                 int(np.clip(east + d_east + safety_distance - east_min, 0, east_size-1)),
             ]
             grid[obstacle[0]:obstacle[1]+1, obstacle[2]:obstacle[3]+1] = 1
-            plg = Polygon([(obstacle[2],obstacle[0]),
-                           (obstacle[3]+1,obstacle[0]),
-                           (obstacle[3]+1, obstacle[1]+1),
-                           (obstacle[2],obstacle[1]+1)])
+            plg = Polygon([(obstacle[2]+1,obstacle[0]+1),
+                           (obstacle[3],obstacle[0]+1),
+                           (obstacle[3], obstacle[1]),
+                           (obstacle[2]+1,obstacle[1])])
             polygons.append(plg)
     return grid, int(north_min), int(east_min), polygons
 
