@@ -38,7 +38,7 @@ def prune_path(path, polygons, debug=False, nodeId=-1):
     startIdx = 0
     ptStart = path[startIdx]
     result = [ptStart]
-    print('length of original path:', len(path))
+    print('number of turning points of original path:', len(path))
     print('pruning path...')
 
     path0 = [ele[::-1] for ele in path]
@@ -76,7 +76,7 @@ def prune_path(path, polygons, debug=False, nodeId=-1):
         result.append(ptStart)
         if startIdx == len(path) -1:
             break
-    print('length of pruned path:', len(result))
+    print('number of turning after pruning:', len(result))
     return result
 
 
