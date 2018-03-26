@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14845bfb-525f-4ebd-b623-d140bad09c6d" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/writeups/ReadMe.txt" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/motion_planning.py" afterPath="$PROJECT_DIR$/motion_planning.py" />
-      <change beforePath="$PROJECT_DIR$/writeups/explain_the_starter_code.txt" afterPath="$PROJECT_DIR$/writeups/explain_the_starter_code.txt" />
+      <change beforePath="$PROJECT_DIR$/planning_utils.py" afterPath="$PROJECT_DIR$/planning_utils.py" />
+      <change beforePath="$PROJECT_DIR$/writeups/ReadMe.txt" afterPath="$PROJECT_DIR$/writeups/ReadMe.txt" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,8 +17,8 @@
       <file leaf-file-name="planning_utils.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/planning_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="251" column="14" lean-forward="true" selection-start-line="251" selection-start-column="14" selection-end-line="251" selection-end-column="14" />
+            <state relative-caret-position="-414">
+              <caret line="183" column="39" lean-forward="true" selection-start-line="183" selection-start-column="39" selection-end-line="183" selection-end-column="39" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -51,8 +49,8 @@
       <file leaf-file-name="ReadMe.txt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/writeups/ReadMe.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="38" lean-forward="true" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
+            <state relative-caret-position="195">
+              <caret line="13" column="82" lean-forward="false" selection-start-line="13" selection-start-column="82" selection-end-line="13" selection-end-column="82" />
               <folding />
             </state>
           </provider>
@@ -140,10 +138,10 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/planning_utils.py" />
         <option value="$PROJECT_DIR$/writeups/explain_the_starter_code.txt" />
         <option value="$PROJECT_DIR$/writeups/a_sar_with_pruning_methods.txt" />
         <option value="$PROJECT_DIR$/motion_planning.py" />
+        <option value="$PROJECT_DIR$/planning_utils.py" />
         <option value="$PROJECT_DIR$/writeups/ReadMe.txt" />
       </list>
     </option>
@@ -538,16 +536,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/planning_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="251" column="14" lean-forward="true" selection-start-line="251" selection-start-column="14" selection-end-line="251" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/motion_planning.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="149">
@@ -566,10 +554,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/planning_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-414">
+          <caret line="183" column="39" lean-forward="true" selection-start-line="183" selection-start-column="39" selection-end-line="183" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/writeups/ReadMe.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="38" lean-forward="true" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
+        <state relative-caret-position="195">
+          <caret line="13" column="82" lean-forward="false" selection-start-line="13" selection-start-column="82" selection-end-line="13" selection-end-column="82" />
           <folding />
         </state>
       </provider>

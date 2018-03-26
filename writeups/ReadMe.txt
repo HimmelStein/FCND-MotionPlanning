@@ -11,7 +11,7 @@ The planner will:
  (5) convert start position to current position rather than map center
  (6) randomly choose a free location from the grid, set it as the goal location
  (7) adapt to set goal as latitude / longitude position
- (8) perform A* algorithm to search a path
+ (8) add diagonal motions on the grid with the cost of sqrt(2) to the A* algorithm
  (9) prune the number of turning points of the path
 
 If you want to see the path in the grid map found by the A* algorithm, type
