@@ -29,7 +29,7 @@ def before_waypoint_of(waypoint, path=[]):
         return []
 
 
-def prune_path(path, polygons, debug=False):
+def prune_path(path, polygons, debug=False, maxPeep = 5):
     """
     :param path:
     :param polygons:
@@ -40,8 +40,12 @@ def prune_path(path, polygons, debug=False):
     result = [ptStart]
     while True:
         idx = startIdx + 1
-        while idx <= len(path) - 1:
-            ptx = path[idx]
+        nextIdx = startIdx + 1
+        # while idx <= len(path) - 1:
+        for i in range(len(path)-idx):
+            if idx + i > len(path)-1:
+                continue
+            ptx = path[idx+i]
             ln = LineString([ptStart, ptx])
             canConnect = True
             for polygon in polygons:
@@ -54,14 +58,15 @@ def prune_path(path, polygons, debug=False):
                     break # for polygon
 
             if canConnect:
-                nextIdx = idx
-            idx += 1
+                nextIdx = idx + i
+
         startIdx = nextIdx
         print(startIdx)
         ptStart = path[startIdx]
         result.append(ptStart)
         if startIdx == len(path) -1:
             break
+    print('length of pruned path:', len(result))
     return result
 
 
