@@ -120,8 +120,8 @@ class MotionPlanning(Drone):
     def plan_path(self):
         self.flight_state = States.PLANNING
         print("Searching for a path ...")
-        TARGET_ALTITUDE = 7
-        SAFETY_DISTANCE = 8
+        TARGET_ALTITUDE = 5
+        SAFETY_DISTANCE = 5
 
         self.target_position[2] = TARGET_ALTITUDE
 
@@ -165,9 +165,11 @@ class MotionPlanning(Drone):
         freeCells = [list(cell) for cell in np.argwhere(grid==0)]
         random.shuffle(freeCells)
         grid_goal = tuple(freeCells[0])
+        # grid_goal = (687, 882)
+        print("*grid_goal*", grid_goal)
         # grid_goal = (7-north_offset, 789-east_offset)
         global_position = local_to_global((grid_goal[0]+north_offset, grid_goal[1]+east_offset, 0), self.global_home)
-        print("goal positon:",global_position)
+        print("goal positon:", global_position)
 
         if self._mp_method == "a_star":
             # Run A* to find a path from start to goal
