@@ -188,7 +188,8 @@ class MotionPlanning(Drone):
             elif self._prune_level == 1:
                 print("level 1 pruning is performed.")
                 print("Turning points are reduced from {} to {}".format(len(path), len(prunedPath)))
-                waypoints = [[int(p[0] + north_offset), int(p[1] + east_offset), TARGET_ALTITUDE, 0] for p in prunedPath]
+                waypoints = [[int(p[0] + north_offset), int(p[1] + east_offset), TARGET_ALTITUDE, 0]
+                             for p in prunedPath]
             elif self._prune_level == 0:
                 waypoints = [[int(p[0] + north_offset), int(p[1] + east_offset), TARGET_ALTITUDE, 0] for p in path]
 
