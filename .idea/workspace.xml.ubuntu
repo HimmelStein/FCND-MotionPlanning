@@ -2,10 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14845bfb-525f-4ebd-b623-d140bad09c6d" name="Default" comment="">
+<<<<<<< HEAD
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/FCND-Motion-Planning.iml" afterPath="$PROJECT_DIR$/.idea/FCND-Motion-Planning.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/motion_planning_with_assertion.py" afterPath="$PROJECT_DIR$/motion_planning_with_assertion.py" />
+=======
+      <change beforePath="" afterPath="$PROJECT_DIR$/util.py" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/motion_planning_with_assertion.py" afterPath="$PROJECT_DIR$/motion_planning_with_assertion.py" />
+>>>>>>> 240bc40dec26ffe2e983aabdf01a7b37d10d38b9
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,8 +29,8 @@
       <file leaf-file-name="planning_utils.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/planning_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3555">
-              <caret line="243" column="21" lean-forward="false" selection-start-line="243" selection-start-column="21" selection-end-line="243" selection-end-column="21" />
+            <state relative-caret-position="-2752">
+              <caret line="62" column="38" lean-forward="true" selection-start-line="62" selection-start-column="38" selection-end-line="62" selection-end-column="38" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -79,8 +85,13 @@
       <file leaf-file-name="motion_planning_with_assertion.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/motion_planning_with_assertion.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="615">
               <caret line="161" column="0" lean-forward="true" selection-start-line="161" selection-start-column="0" selection-end-line="161" selection-end-column="0" />
+=======
+            <state relative-caret-position="211">
+              <caret line="53" column="28" lean-forward="false" selection-start-line="53" selection-start-column="11" selection-end-line="53" selection-end-column="28" />
+>>>>>>> 240bc40dec26ffe2e983aabdf01a7b37d10d38b9
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -88,6 +99,18 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="util.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/util.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="26" lean-forward="false" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
+=======
       <file leaf-file-name="colliders.csv" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/colliders.csv">
           <provider selected="true" editor-type-id="text-editor">
@@ -98,7 +121,25 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="mavutil.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/pymavlink/mavutil.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3135">
+              <caret line="214" column="0" lean-forward="false" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+>>>>>>> 240bc40dec26ffe2e983aabdf01a7b37d10d38b9
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -113,11 +154,21 @@
       <find>def send_waypoints</find>
       <find>calculate_box</find>
       <find>waypoint_transition()</find>
-      <find>waypoint_transition</find>
       <find>cmd_position</find>
       <find>msgpack</find>
       <find>send_waypoints</find>
       <find>debug</find>
+      <find>grid_start</find>
+      <find>Local</find>
+      <find>waypoint_transition</find>
+      <find>target position</find>
+      <find>ALT</find>
+      <find>TARG</find>
+      <find>takeoff transition</find>
+      <find>takeoff</find>
+      <find>way</find>
+      <find>plan_path</find>
+      <find>self.flight_state</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -132,15 +183,22 @@
         <option value="$PROJECT_DIR$/writeups/ReadMe.txt" />
         <option value="$PROJECT_DIR$/planning_utils.py" />
         <option value="$PROJECT_DIR$/motion_planning.py" />
+        <option value="$PROJECT_DIR$/util.py" />
         <option value="$PROJECT_DIR$/motion_planning_with_assertion.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
+<<<<<<< HEAD
     <option name="x" value="65" />
     <option name="y" value="24" />
     <option name="width" value="1855" />
     <option name="height" value="1176" />
+=======
+    <option name="y" value="23" />
+    <option name="width" value="1440" />
+    <option name="height" value="813" />
+>>>>>>> 240bc40dec26ffe2e983aabdf01a7b37d10d38b9
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -258,7 +316,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
     <frame x="65" y="24" width="1855" height="1176" extended-state="6" />
+=======
+    <frame x="0" y="23" width="1440" height="813" extended-state="0" />
+>>>>>>> 240bc40dec26ffe2e983aabdf01a7b37d10d38b9
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15687332" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -351,14 +413,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/writeups/explain_the_starter_code.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/writeups/ReadMe.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -604,19 +658,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/planning_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3555">
-          <caret line="243" column="21" lean-forward="false" selection-start-line="243" selection-start-column="21" selection-end-line="243" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/motion_planning.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3345">
+        <state relative-caret-position="383">
           <caret line="235" column="32" lean-forward="false" selection-start-line="235" selection-start-column="27" selection-end-line="235" selection-end-column="32" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
@@ -624,10 +668,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="3345">
+          <caret line="235" column="32" lean-forward="false" selection-start-line="235" selection-start-column="27" selection-end-line="235" selection-end-column="32" />
+=======
+        <state relative-caret-position="15">
+          <caret line="1" column="26" lean-forward="false" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/planning_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2752">
+          <caret line="62" column="38" lean-forward="true" selection-start-line="62" selection-start-column="38" selection-end-line="62" selection-end-column="38" />
+>>>>>>> 240bc40dec26ffe2e983aabdf01a7b37d10d38b9
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/motion_planning_with_assertion.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="615">
           <caret line="161" column="0" lean-forward="true" selection-start-line="161" selection-start-column="0" selection-end-line="161" selection-end-column="0" />
+=======
+        <state relative-caret-position="211">
+          <caret line="53" column="28" lean-forward="false" selection-start-line="53" selection-start-column="11" selection-end-line="53" selection-end-column="28" />
+>>>>>>> 240bc40dec26ffe2e983aabdf01a7b37d10d38b9
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
