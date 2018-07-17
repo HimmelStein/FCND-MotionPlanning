@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14845bfb-525f-4ebd-b623-d140bad09c6d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/motion_planning.py" afterPath="$PROJECT_DIR$/motion_planning.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/FCND-Motion-Planning.iml" afterPath="$PROJECT_DIR$/.idea/FCND-Motion-Planning.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/motion_planning_with_assertion.py" afterPath="$PROJECT_DIR$/motion_planning_with_assertion.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -11,6 +14,10 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="planning_utils.py" pinned="false" current-in-tab="false">
@@ -21,16 +28,6 @@
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="drone.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/udacidrone/drone.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4065">
-              <caret line="276" column="0" lean-forward="false" selection-start-line="276" selection-start-column="0" selection-end-line="276" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -70,7 +67,7 @@
       <file leaf-file-name="motion_planning.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/motion_planning.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="383">
+            <state relative-caret-position="3345">
               <caret line="235" column="32" lean-forward="false" selection-start-line="235" selection-start-column="27" selection-end-line="235" selection-end-column="32" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
@@ -82,8 +79,8 @@
       <file leaf-file-name="motion_planning_with_assertion.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/motion_planning_with_assertion.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="167" column="10" lean-forward="false" selection-start-line="167" selection-start-column="10" selection-end-line="167" selection-end-column="10" />
+            <state relative-caret-position="615">
+              <caret line="161" column="0" lean-forward="true" selection-start-line="161" selection-start-column="0" selection-end-line="161" selection-end-column="0" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -96,26 +93,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="25980">
               <caret line="1732" column="18" lean-forward="false" selection-start-line="1732" selection-start-column="10" selection-end-line="1732" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="traceback.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/traceback.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5325">
-              <caret line="358" column="0" lean-forward="false" selection-start-line="358" selection-start-column="0" selection-end-line="358" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mavutil.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/pymavlink/mavutil.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3135">
-              <caret line="214" column="0" lean-forward="false" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -160,10 +137,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="270" />
-    <option name="y" value="95" />
-    <option name="width" value="1440" />
-    <option name="height" value="821" />
+    <option name="x" value="65" />
+    <option name="y" value="24" />
+    <option name="width" value="1855" />
+    <option name="height" value="1176" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -181,18 +158,8 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="FCND-Motion-Planning" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FCND-Motion-Planning" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="Scope" />
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -212,7 +179,7 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.motion_planning">
-    <configuration name="backyard_flyer_solution" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration default="false" name="backyard_flyer_solution" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -227,10 +194,9 @@
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/backyard_flyer_solution.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
+      <method />
     </configuration>
-    <configuration name="motion_planning" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration default="false" name="motion_planning" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -245,8 +211,24 @@
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/motion_planning.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
     </configuration>
     <list size="2">
       <item index="0" class="java.lang.String" itemvalue="Python.backyard_flyer_solution" />
@@ -276,26 +258,26 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="270" y="95" width="1440" height="821" extended-state="0" />
+    <frame x="65" y="24" width="1855" height="1176" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20225511" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15687332" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4138889" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4138889" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -403,22 +385,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/traceback.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5325">
-          <caret line="358" column="0" lean-forward="false" selection-start-line="358" selection-start-column="0" selection-end-line="358" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/pymavlink/mavutil.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3135">
-          <caret line="214" column="0" lean-forward="false" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/traceback.py" />
+    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/pymavlink/mavutil.py" />
     <entry file="file://$PROJECT_DIR$/motion_planning.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3465">
@@ -439,14 +407,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/udacidrone/drone.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4065">
-          <caret line="276" column="0" lean-forward="false" selection-start-line="276" selection-start-column="0" selection-end-line="276" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/udacidrone/drone.py" />
     <entry file="file://$PROJECT_DIR$/writeups/ReadMe.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -481,22 +442,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/traceback.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5325">
-          <caret line="358" column="0" lean-forward="false" selection-start-line="358" selection-start-column="0" selection-end-line="358" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/pymavlink/mavutil.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3135">
-          <caret line="214" column="0" lean-forward="false" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/traceback.py" />
+    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/pymavlink/mavutil.py" />
     <entry file="file://$PROJECT_DIR$/motion_planning.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2175">
@@ -517,14 +464,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/udacidrone/drone.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4065">
-          <caret line="276" column="0" lean-forward="false" selection-start-line="276" selection-start-column="0" selection-end-line="276" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/udacidrone/drone.py" />
     <entry file="file://$PROJECT_DIR$/writeups/explain_the_starter_code.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
@@ -559,22 +499,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/traceback.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5325">
-          <caret line="358" column="0" lean-forward="false" selection-start-line="358" selection-start-column="0" selection-end-line="358" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/pymavlink/mavutil.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3135">
-          <caret line="214" column="0" lean-forward="false" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/traceback.py" />
+    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/pymavlink/mavutil.py" />
     <entry file="file://$PROJECT_DIR$/motion_planning.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2175">
@@ -595,21 +521,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/udacidrone/drone.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4125">
-          <caret line="280" column="0" lean-forward="false" selection-start-line="280" selection-start-column="0" selection-end-line="280" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/udacidrone/connection/connection.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1230">
-          <caret line="85" column="0" lean-forward="false" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/udacidrone/drone.py" />
+    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/udacidrone/connection/connection.py" />
     <entry file="file://$PROJECT_DIR$/writeups/explain_the_starter_code.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
@@ -618,13 +531,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/udacidrone/connection/mavlink_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1980">
-          <caret line="139" column="0" lean-forward="false" selection-start-line="139" selection-start-column="0" selection-end-line="139" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/udacidrone/connection/mavlink_utils.py" />
     <entry file="file://$PROJECT_DIR$/backyard_flyer_solution.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -635,21 +542,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/pymavlink/mavutil.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14565">
-          <caret line="976" column="0" lean-forward="false" selection-start-line="976" selection-start-column="0" selection-end-line="976" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/udacidrone/frame_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/pymavlink/mavutil.py" />
+    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/udacidrone/frame_utils.py" />
     <entry file="file://$PROJECT_DIR$/motion_planning.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1590">
@@ -667,57 +561,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/udacidrone/frame_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/udacidrone/connection/mavlink_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="139" column="0" lean-forward="false" selection-start-line="139" selection-start-column="0" selection-end-line="139" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/udacidrone/connection/mavlink_connection.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="120" column="0" lean-forward="false" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/udacidrone/connection/connection.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="85" column="0" lean-forward="false" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/msgpack/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/traceback.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5325">
-          <caret line="358" column="0" lean-forward="false" selection-start-line="358" selection-start-column="0" selection-end-line="358" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/pymavlink/mavutil.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3135">
-          <caret line="214" column="0" lean-forward="false" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/udacidrone/frame_utils.py" />
+    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/udacidrone/connection/mavlink_utils.py" />
+    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/udacidrone/connection/mavlink_connection.py" />
+    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/udacidrone/connection/connection.py" />
+    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/msgpack/__init__.py" />
+    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/traceback.py" />
+    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/pymavlink/mavutil.py" />
     <entry file="file://$PROJECT_DIR$/colliders.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25980">
@@ -726,14 +576,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/udacidrone/drone.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4065">
-          <caret line="276" column="0" lean-forward="false" selection-start-line="276" selection-start-column="0" selection-end-line="276" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/udacidrone/drone.py" />
     <entry file="file://$PROJECT_DIR$/backyard_flyer_solution.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1170">
@@ -773,7 +616,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/motion_planning.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
+        <state relative-caret-position="3345">
           <caret line="235" column="32" lean-forward="false" selection-start-line="235" selection-start-column="27" selection-end-line="235" selection-end-column="32" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
@@ -783,8 +626,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/motion_planning_with_assertion.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="167" column="10" lean-forward="false" selection-start-line="167" selection-start-column="10" selection-end-line="167" selection-end-column="10" />
+        <state relative-caret-position="615">
+          <caret line="161" column="0" lean-forward="true" selection-start-line="161" selection-start-column="0" selection-end-line="161" selection-end-column="0" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>

@@ -46,6 +46,7 @@ class MotionPlanning(Drone):
         self.register_callback(MsgID.STATE, self.state_callback)
 
     def local_position_callback(self):
+        print("location:", self.local_position[0], self.local_position[1])
         if self.flight_state == States.TAKEOFF:
             if -1.0 * self.local_position[2] > 0.95 * self.target_position[2]:
                 self.waypoint_transition()
@@ -120,7 +121,7 @@ class MotionPlanning(Drone):
     def plan_path(self):
         self.flight_state = States.PLANNING
         print("Searching for a path ...")
-        TARGET_ALTITUDE = 5
+        TARGET_ALTITUDE = 1
         SAFETY_DISTANCE = 5
 
         self.target_position[2] = TARGET_ALTITUDE
@@ -165,7 +166,7 @@ class MotionPlanning(Drone):
         freeCells = [list(cell) for cell in np.argwhere(grid==0)]
         random.shuffle(freeCells)
         grid_goal = tuple(freeCells[0])
-        # grid_goal = (687, 882)
+        grid_goal = (750,284)
         print("*grid_goal*", grid_goal)
         # grid_goal = (7-north_offset, 789-east_offset)
         global_position = local_to_global((grid_goal[0]+north_offset, grid_goal[1]+east_offset, 0), self.global_home)
