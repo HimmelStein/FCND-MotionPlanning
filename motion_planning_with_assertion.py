@@ -29,6 +29,10 @@ class MotionPlanning(Drone):
         super().__init__(connection)
 
         self.target_position = np.array([0.0, 0.0, 0.0])
+        self.last_target = np.array([0.0, 0.0, 0.0])
+        self.num_of_steps = 0
+        self.TARGET_ALTITUDE = 1
+        self.SAFETY_DISTANCE = 5
         self.waypoints = []
         self.in_mission = True
         self.check_state = {}
@@ -46,16 +50,23 @@ class MotionPlanning(Drone):
         self.register_callback(MsgID.STATE, self.state_callback)
 
     def local_position_callback(self):
+        print("local position: ", self.local_position[0], self.local_position[1])
         if self.flight_state == States.TAKEOFF:
             if -1.0 * self.local_position[2] > 0.95 * self.target_position[2]:
                 self.waypoint_transition()
         elif self.flight_state == States.WAYPOINT:
+            self.num_of_steps += 1
+            print("num of steps: ", self.num_of_steps)
             if np.linalg.norm(self.target_position[0:2] - self.local_position[0:2]) < 1.0:
                 if len(self.waypoints) > 0:
                     self.waypoint_transition()
                 else:
                     if np.linalg.norm(self.local_velocity[0:2]) < 1.0:
                         self.landing_transition()
+            elif self.num_of_steps > 5:
+                self.waypoints.insert(0, self.target_position)
+                self.target_position = self.last_target
+                self.TARGET_ALTITUDE += 10
 
     def velocity_callback(self):
         if self.flight_state == States.LANDING:
@@ -69,6 +80,7 @@ class MotionPlanning(Drone):
                 self.arming_transition()
             elif self.flight_state == States.ARMING:
                 if self.armed:
+                    print("armed...., planning path....")
                     self.plan_path()
             elif self.flight_state == States.PLANNING:
                 self.takeoff_transition()
@@ -90,7 +102,9 @@ class MotionPlanning(Drone):
     def waypoint_transition(self):
         self.flight_state = States.WAYPOINT
         print("waypoint transition")
+        self.last_target = self.target_position
         self.target_position = self.waypoints.pop(0)
+        self.num_of_steps = 0
         print('target position', self.target_position)
         self.cmd_position(self.target_position[0], self.target_position[1], self.target_position[2], self.target_position[3])
 
@@ -120,10 +134,8 @@ class MotionPlanning(Drone):
     def plan_path(self):
         self.flight_state = States.PLANNING
         print("Searching for a path ...")
-        TARGET_ALTITUDE = 5
-        SAFETY_DISTANCE = 5
 
-        self.target_position[2] = TARGET_ALTITUDE
+        self.target_position[2] = self.TARGET_ALTITUDE
 
         # TODO: read lat0, lon0 from colliders into floating point values
         with open('colliders.csv') as ifh:
@@ -147,7 +159,9 @@ class MotionPlanning(Drone):
         data = np.loadtxt('colliders.csv', delimiter=',', dtype='Float64', skiprows=2)
         
         # Define a grid for a particular altitude and safety margin around obstacles
-        grid, north_offset, east_offset, polygons = create_grid_polygons(data, TARGET_ALTITUDE, SAFETY_DISTANCE)
+        grid, north_offset, east_offset, polygons = create_grid_polygons(data,
+                                                                         self.TARGET_ALTITUDE,
+                                                                         self.SAFETY_DISTANCE)
         print("North offset = {0}, east offset = {1}".format(north_offset, east_offset))
         # show_grid(grid)
         # Define starting point on the grid (this is just grid center)
@@ -155,7 +169,7 @@ class MotionPlanning(Drone):
         # TODO: convert start position to current position rather than map center
         north_start, east_start, down_start = self.local_position
         grid_start = (int(north_start-north_offset), int(east_start-east_offset))
-
+        # grid_start = (315, 445)
         # Set goal as some arbitrary position on the grid
         # grid_goal = (-north_offset + 10, -east_offset + 30)
 
@@ -165,7 +179,7 @@ class MotionPlanning(Drone):
         freeCells = [list(cell) for cell in np.argwhere(grid==0)]
         random.shuffle(freeCells)
         grid_goal = tuple(freeCells[0])
-        # grid_goal = (687, 882)
+        grid_goal = (750, 284)
         print("*grid_goal*", grid_goal)
         # grid_goal = (7-north_offset, 789-east_offset)
         global_position = local_to_global((grid_goal[0]+north_offset, grid_goal[1]+east_offset, 0), self.global_home)
@@ -186,14 +200,14 @@ class MotionPlanning(Drone):
 
             if self._prune_level == 2:
                 path = prune_path(prunedPath, polygons, debug=self._debug, nodeId = self._nodeId)
-                waypoints = [[int(p[0] + north_offset), int(p[1] + east_offset), TARGET_ALTITUDE, 0] for p in path]
+                waypoints = [[int(p[0] + north_offset), int(p[1] + east_offset), self.TARGET_ALTITUDE, 0] for p in path]
             elif self._prune_level == 1:
                 print("level 1 pruning is performed.")
                 print("Turning points are reduced from {} to {}".format(len(path), len(prunedPath)))
-                waypoints = [[int(p[0] + north_offset), int(p[1] + east_offset), TARGET_ALTITUDE, 0]
+                waypoints = [[int(p[0] + north_offset), int(p[1] + east_offset), self.TARGET_ALTITUDE, 0]
                              for p in prunedPath]
             elif self._prune_level == 0:
-                waypoints = [[int(p[0] + north_offset), int(p[1] + east_offset), TARGET_ALTITUDE, 0] for p in path]
+                waypoints = [[int(p[0] + north_offset), int(p[1] + east_offset), self.TARGET_ALTITUDE, 0] for p in path]
 
         elif self._mp_method == "simplest":
             pass
@@ -206,6 +220,7 @@ class MotionPlanning(Drone):
 
         # Set self.waypoints
         self.waypoints = waypoints
+        print("*waypoints*", len(waypoints))
         # TODO: send waypoints to sim
         self.send_waypoints()
 
