@@ -2,6 +2,7 @@ import argparse
 import time
 import msgpack
 import random
+import copy
 from enum import Enum, auto
 from shapely.geometry import LineString, Polygon
 import numpy as np
@@ -29,8 +30,9 @@ class MotionPlanning(Drone):
         super().__init__(connection)
 
         self.target_position = np.array([0.0, 0.0, 0.0])
-        self.last_target = np.array([0.0, 0.0, 0.0])
+        self.last_targets = []
         self.num_of_steps = 0
+        self.total_num = 3
         self.TARGET_ALTITUDE = 1
         self.SAFETY_DISTANCE = 5
         self.waypoints = []
@@ -50,11 +52,7 @@ class MotionPlanning(Drone):
         self.register_callback(MsgID.STATE, self.state_callback)
 
     def local_position_callback(self):
-<<<<<<< HEAD
         print("location:", self.local_position[0], self.local_position[1])
-=======
-        print("local position: ", self.local_position[0], self.local_position[1])
->>>>>>> 240bc40dec26ffe2e983aabdf01a7b37d10d38b9
         if self.flight_state == States.TAKEOFF:
             if -1.0 * self.local_position[2] > 0.95 * self.target_position[2]:
                 self.waypoint_transition()
@@ -67,10 +65,22 @@ class MotionPlanning(Drone):
                 else:
                     if np.linalg.norm(self.local_velocity[0:2]) < 1.0:
                         self.landing_transition()
-            elif self.num_of_steps > 5:
-                self.waypoints.insert(0, self.target_position)
-                self.target_position = self.last_target
-                self.TARGET_ALTITUDE += 10
+            elif self.num_of_steps > self.total_num:
+                self.TARGET_ALTITUDE += 0.5
+                blst = [[ele[0], ele[1], self.TARGET_ALTITUDE, ele[3]]
+                        for ele in self.last_targets[:15]]
+                blst1 = copy.deepcopy(blst)
+                blst1.reverse()
+                blst1.pop(0)
+                blst1.append(self.target_position)
+                self.waypoints = blst + blst1 + self.waypoints
+                print(self.waypoints[:31])
+                self.send_waypoints()
+                self.raising_altitude()
+
+            else:
+                self.cmd_position(self.target_position[0], self.target_position[1], self.target_position[2],
+                                  self.target_position[3])
 
     def velocity_callback(self):
         if self.flight_state == States.LANDING:
@@ -106,11 +116,26 @@ class MotionPlanning(Drone):
     def waypoint_transition(self):
         self.flight_state = States.WAYPOINT
         print("waypoint transition")
-        self.last_target = self.target_position
+        self.last_targets.insert(0, self.target_position)
         self.target_position = self.waypoints.pop(0)
         self.num_of_steps = 0
         print('target position', self.target_position)
-        self.cmd_position(self.target_position[0], self.target_position[1], self.target_position[2], self.target_position[3])
+        print('cmd_position:', self.target_position[0], self.target_position[1], self.target_position[2],
+                          self.target_position[3])
+        self.cmd_position(self.target_position[0], self.target_position[1], self.target_position[2],
+                          self.target_position[3])
+
+    def raising_altitude(self):
+        self.landing_transition()
+        time.sleep(10)
+        self.disarming_transition()
+        time.sleep(5)
+        self.arming_transition()
+        time.sleep(5)
+        self.takeoff_transition()
+        time.sleep(10)
+        self.waypoint_transition()
+
 
     def landing_transition(self):
         self.flight_state = States.LANDING
@@ -138,11 +163,6 @@ class MotionPlanning(Drone):
     def plan_path(self):
         self.flight_state = States.PLANNING
         print("Searching for a path ...")
-<<<<<<< HEAD
-        TARGET_ALTITUDE = 1
-        SAFETY_DISTANCE = 5
-=======
->>>>>>> 240bc40dec26ffe2e983aabdf01a7b37d10d38b9
 
         self.target_position[2] = self.TARGET_ALTITUDE
 
@@ -188,11 +208,7 @@ class MotionPlanning(Drone):
         freeCells = [list(cell) for cell in np.argwhere(grid==0)]
         random.shuffle(freeCells)
         grid_goal = tuple(freeCells[0])
-<<<<<<< HEAD
-        grid_goal = (750,284)
-=======
         grid_goal = (750, 284)
->>>>>>> 240bc40dec26ffe2e983aabdf01a7b37d10d38b9
         print("*grid_goal*", grid_goal)
         # grid_goal = (7-north_offset, 789-east_offset)
         global_position = local_to_global((grid_goal[0]+north_offset, grid_goal[1]+east_offset, 0), self.global_home)
