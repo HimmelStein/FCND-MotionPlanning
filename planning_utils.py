@@ -7,6 +7,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+def local_to_grid(local, northOffset=0, eastOffset=0):
+    north_start, east_start, down_start = local
+    return (int(north_start - northOffset), int(east_start - eastOffset))
+
+
+def grid_to_local(cell, northOffset=0, eastOffset=0):
+    northPos, eastPos = cell
+    return (northPos + northOffset, eastPos + eastOffset)
+
+
 def find_waypoints_from_to(path, waypoint, to=()):
     idx0 = path.index(waypoint)
     idx1 = path.index(to)
