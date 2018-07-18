@@ -2,11 +2,13 @@ import argparse
 import time
 import msgpack
 import random
+import copy
 from enum import Enum, auto
 from shapely.geometry import LineString, Polygon
 import numpy as np
 
 from planning_utils import a_star, heuristic, create_grid_polygons, prune_path
+import waypoint_data
 from udacidrone import Drone
 from udacidrone.connection import MavlinkConnection
 from udacidrone.messaging import MsgID
@@ -21,6 +23,7 @@ class States(Enum):
     LANDING = auto()
     DISARMING = auto()
     PLANNING = auto()
+    WAYUPDATE = auto()
 
 
 class MotionPlanning(Drone):
@@ -29,8 +32,9 @@ class MotionPlanning(Drone):
         super().__init__(connection)
 
         self.target_position = np.array([0.0, 0.0, 0.0])
-        self.last_target = np.array([0.0, 0.0, 0.0])
+        self.last_targets = []
         self.num_of_steps = 0
+        self.total_steps = 15
         self.TARGET_ALTITUDE = 1
         self.SAFETY_DISTANCE = 5
         self.waypoints = []
@@ -63,10 +67,40 @@ class MotionPlanning(Drone):
                 else:
                     if np.linalg.norm(self.local_velocity[0:2]) < 1.0:
                         self.landing_transition()
-            elif self.num_of_steps > 5:
-                self.waypoints.insert(0, self.target_position)
-                self.target_position = self.last_target
-                self.TARGET_ALTITUDE += 10
+            elif self.num_of_steps > 3:
+                self.flight_state = States.WAYUPDATE
+                blst = self.last_targets[:15]
+                blst1 = copy.deepcopy(blst)
+                blst1.reverse()
+                blst1.pop(0)
+                blst1.append(self.target_position)
+                self.waypoints = blst + blst1 + self.waypoints
+                self.num_of_steps = 0
+                print("landing", -1.0 * self.local_position[2] - 0.95 * self.target_position[2])
+                while -1.0 * self.local_position[2] - 0.95 * self.target_position[2] < 0.09:
+                    print("landing", -1.0 * self.local_position[2] - 0.95 * self.target_position[2])
+                    self.land()
+                    time.sleep(0.1)
+                while -1.0 * self.local_position[2] - 0.95 * self.target_position[2] < 0.1:
+                    print("take off ", -1.0 * self.local_position[2] - 0.95 * self.target_position[2])
+                    self.takeoff(self.target_position[2])
+                    time.sleep(0.1)
+
+        elif self.flight_state == States.WAYUPDATE:
+            print("waypoint update")
+            self.num_of_steps += 1
+            self.target_position = self.waypoints.pop(0)
+            self.TARGET_ALTITUDE += 0.5
+            self.target_position[2] = self.TARGET_ALTITUDE
+            self.takeoff(self.target_position[2])
+            print('update target position', self.target_position)
+            self.cmd_position(self.target_position[0], self.target_position[1], self.target_position[2],
+                                self.target_position[3])
+            time.sleep(5)
+            if self.num_of_steps == 30:
+                self.flight_state == States.WAYPOINT
+                self.waypoint_transition()
+
 
     def velocity_callback(self):
         if self.flight_state == States.LANDING:
@@ -102,7 +136,7 @@ class MotionPlanning(Drone):
     def waypoint_transition(self):
         self.flight_state = States.WAYPOINT
         print("waypoint transition")
-        self.last_target = self.target_position
+        self.last_targets.insert(0, self.target_position)
         self.target_position = self.waypoints.pop(0)
         self.num_of_steps = 0
         print('target position', self.target_position)
@@ -129,6 +163,7 @@ class MotionPlanning(Drone):
         print("Sending waypoints to simulator ...")
         # data = msgpack.dumps(self.waypoints)
         data = msgpack.packb(self.waypoints, strict_types=True)
+        # data = msgpack.packb([self.target_position], strict_types=True)
         self.connection._master.write(data)
 
     def plan_path(self):
@@ -136,6 +171,14 @@ class MotionPlanning(Drone):
         print("Searching for a path ...")
 
         self.target_position[2] = self.TARGET_ALTITUDE
+
+        # Set self.waypoints
+        if debug:
+            self.waypoints = waypoint_data.waypoints
+            print("*waypoints*", waypoint_data.waypoints)
+            # TODO: send waypoints to sim
+            self.send_waypoints()
+            return
 
         # TODO: read lat0, lon0 from colliders into floating point values
         with open('colliders.csv') as ifh:
@@ -179,7 +222,7 @@ class MotionPlanning(Drone):
         freeCells = [list(cell) for cell in np.argwhere(grid==0)]
         random.shuffle(freeCells)
         grid_goal = tuple(freeCells[0])
-        grid_goal = (750, 284)
+        # grid_goal = (750, 284)
         print("*grid_goal*", grid_goal)
         # grid_goal = (7-north_offset, 789-east_offset)
         global_position = local_to_global((grid_goal[0]+north_offset, grid_goal[1]+east_offset, 0), self.global_home)
@@ -220,7 +263,7 @@ class MotionPlanning(Drone):
 
         # Set self.waypoints
         self.waypoints = waypoints
-        print("*waypoints*", len(waypoints))
+        print("*waypoints*", waypoints)
         # TODO: send waypoints to sim
         self.send_waypoints()
 

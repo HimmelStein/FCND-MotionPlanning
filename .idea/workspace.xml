@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14845bfb-525f-4ebd-b623-d140bad09c6d" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/util.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/__init__.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/waypoint_data.py" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/motion_planning_with_assertion.py" afterPath="$PROJECT_DIR$/motion_planning_with_assertion.py" />
     </list>
@@ -81,14 +82,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="motion_planning_with_assertion.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="motion_planning_with_assertion.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/motion_planning_with_assertion.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="53" column="28" lean-forward="false" selection-start-line="53" selection-start-column="11" selection-end-line="53" selection-end-column="28" />
+            <state relative-caret-position="337">
+              <caret line="164" column="8" lean-forward="false" selection-start-line="164" selection-start-column="8" selection-end-line="164" selection-end-column="8" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="waypoint_data.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/waypoint_data.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="27" column="112" lean-forward="false" selection-start-line="27" selection-start-column="104" selection-end-line="27" selection-end-column="112" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -98,26 +119,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="15">
               <caret line="1" column="26" lean-forward="false" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="colliders.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/colliders.csv">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25980">
-              <caret line="1732" column="18" lean-forward="false" selection-start-line="1732" selection-start-column="10" selection-end-line="1732" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mavutil.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/miniconda3/envs/fcnd/lib/python3.6/site-packages/pymavlink/mavutil.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3135">
-              <caret line="214" column="0" lean-forward="false" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -134,12 +135,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>global_position</find>
-      <find>global_home</find>
-      <find>self.global_home</find>
-      <find>_update_local_position</find>
-      <find>local_position</find>
-      <find>self.local_position</find>
       <find>send_waypoints()</find>
       <find>msg</find>
       <find>def send_waypoints</find>
@@ -156,10 +151,20 @@
       <find>ALT</find>
       <find>TARG</find>
       <find>takeoff transition</find>
-      <find>takeoff</find>
       <find>way</find>
       <find>plan_path</find>
       <find>self.flight_state</find>
+      <find>ALTI</find>
+      <find>ALTITUDE</find>
+      <find>7</find>
+      <find>States.WAYPOINT</find>
+      <find>[167, -39, 1, 0]</find>
+      <find>landing_transition</find>
+      <find>States.LANDING</find>
+      <find>land()</find>
+      <find>takeoff</find>
+      <find>takeoff_transition</find>
+      <find>TAKEOFF</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -175,6 +180,9 @@
         <option value="$PROJECT_DIR$/planning_utils.py" />
         <option value="$PROJECT_DIR$/motion_planning.py" />
         <option value="$PROJECT_DIR$/util.py" />
+        <option value="$PROJECT_DIR$/data.py" />
+        <option value="$PROJECT_DIR$/__init__.py" />
+        <option value="$PROJECT_DIR$/waypoint_data.py" />
         <option value="$PROJECT_DIR$/motion_planning_with_assertion.py" />
       </list>
     </option>
@@ -206,6 +214,15 @@
             <path>
               <item name="FCND-Motion-Planning" type="b2602c69:ProjectViewProjectNode" />
               <item name="FCND-Motion-Planning" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FCND-Motion-Planning" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+            <path>
+              <item name="FCND-Motion-Planning" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.6 (fcnd) &gt;" type="70bed36:NamedLibraryElementNode" />
             </path>
           </expand>
           <select />
@@ -388,24 +405,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/writeups/ReadMe.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backyard_flyer_solution.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1170">
-          <caret line="85" column="0" lean-forward="false" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
-          <folding>
-            <element signature="e#74#85#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/colliders.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25980">
@@ -800,13 +799,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/motion_planning_with_assertion.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="53" column="28" lean-forward="false" selection-start-line="53" selection-start-column="11" selection-end-line="53" selection-end-column="28" />
+        <state relative-caret-position="337">
+          <caret line="164" column="8" lean-forward="false" selection-start-line="164" selection-start-column="8" selection-end-line="164" selection-end-column="8" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/waypoint_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="112" lean-forward="false" selection-start-line="27" selection-start-column="104" selection-end-line="27" selection-end-column="112" />
+          <folding />
         </state>
       </provider>
     </entry>
