@@ -249,7 +249,7 @@ class MotionPlanning(Drone):
 
         # Set self.waypoints
         self.waypoints = waypoints
-        print("*waypoints*", len(waypoints))
+        print("*waypoints*", waypoints)
         # TODO: send waypoints to sim
         self.send_waypoints()
 
